@@ -1,0 +1,43 @@
+# ═══════════════════════════════════════════════════════════════════
+#  Ktalogo-Dgital · qué NO debe subir a GitHub
+#  (tu base de datos, tus secretos y cachés se quedan en tu PC)
+# ═══════════════════════════════════════════════════════════════════
+
+# ── 1 · DATOS DE TU NEGOCIO (base de datos, blockchain, QR) ─────────
+#   Si los subieras, cualquiera con acceso al repo vería tus
+#   usuarios, pedidos y saldos. Se excluyen TODOS menos .gitkeep.
+data/*
+!data/.gitkeep
+
+# ── 2 · SECRETOS Y CLAVES ───────────────────────────────────────────
+#   .env guarda OPENAI_API_KEY, SMTP_PASS, claves de pagos, etc.
+#   Nunca se sube: el proyecto incluye .env.example como plantilla.
+.env
+
+# ── 3 · EXPORTACIONES que genera la app (PDF/DOC/TXT de catálogos) ──
+exports/
+
+# ── 4 · CACHÉS DE PYTHON Y ENTORNOS VIRTUALES ───────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.flet/
+
+# ── 5 · COMPILACIONES (APK, EXE y builds locales) ───────────────────
+build/
+dist/
+build-exe/
+release/
+*.apk
+.gradle/
+*.spec.bak
+
+# ── 6 · SISTEMAS Y EDITORES ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+.idea/
+.vscode/

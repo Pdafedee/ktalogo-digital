@@ -1,0 +1,11 @@
+# Ktalogo-Dgital · dependencias de PC (Windows / Linux / macOS)
+# flet[desktop,web] instala de una vez el núcleo + cliente de escritorio
+# + servidor web (navegador de celular/tablet). Así la app NUNCA intenta
+# auto-instalarse en el primer arranque (eso falla tras un proxy roto).
+flet[desktop,web]==1.0.5
+flet-charts>=1.0.0
+segno>=1.6.6
+reportlab>=4.0
+python-docx>=1.1
+requests>=2.32.3
+Pillow>=10.0

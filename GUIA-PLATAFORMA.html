@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ktalogo-Dgital · Guía de plataforma v2.2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ PÁGINA ═══════════ */
+@page { size: 720px 1020px; margin: 0; }
+@page flow { margin: 48px 0 44px 0; }
+
+:root{
+  --c-dark:   #0e1f33;  /* portada / cierre (XL, oscuro)        */
+  --c-primary:#1a365d;  /* titulares, tabla header (M)          */
+  --c-mid:    #2a5298;  /* acento, enlaces, números (S/XS)      */
+  --c-bg:     #f5f8fc;  /* fondo del cuerpo (XL, claro)         */
+  --c-stripe: #eef3fa;  /* franjas de tabla (L)                 */
+  --c-border: #d8e2f0;  /* bordes (S)                           */
+  --c-text:   #24303e;
+  --c-muted:  #5c6c80;
+}
+html, body{
+  margin:0; padding:0; width:720px;
+  background:var(--c-bg); /* claro: las páginas de flujo se llenan solas;
+                              portada y cierre pintan su propio fondo oscuro */
+  color:var(--c-text);
+  font-family:'Inter','Noto Sans SC','DejaVu Sans',sans-serif;
+  font-size:15.5px; line-height:1.62;
+  line-break:strict; word-break:normal; overflow-wrap:break-word;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+@media screen{
+  html{ height:auto; display:flex; justify-content:center; background:#0a1626; }
+  body{ transform-origin:top center; margin:16px auto; box-shadow:0 8px 40px rgba(0,0,0,.5); }
+}
+/* sello anti-sub-pixel: evita filo claro en las páginas oscuras fijas */
+.cover, .ending{ box-shadow:0 0 0 2px var(--c-dark); }
+p, td, li{ line-break:strict; text-align:justify; }
+img, svg{ max-width:100%; height:auto; }
+
+/* ═══════════ PORTADA (página fija) ═══════════ */
+.cover{
+  width:720px; height:1020px; box-sizing:border-box;
+  break-after:page; overflow:hidden; position:relative;
+  background:linear-gradient(160deg,#122a45 0%, var(--c-dark) 58%, #0a1828 100%);
+  color:#eaf1fa; display:flex; flex-direction:column; justify-content:center;
+  padding:64px;
+}
+.cover .bg-layer{ position:absolute; inset:0; overflow:hidden; z-index:1; }
+.cover .ring{ position:absolute; border-radius:50%; border:1.5px solid rgba(90,140,200,.16); }
+.cover .r1{ width:430px; height:430px; right:0; top:0; transform:translate(140px,-120px); }
+.cover .r2{ width:300px; height:300px; right:0; top:0; transform:translate(-40px,60px); border-color:rgba(90,140,200,.10); }
+.cover .r3{ width:180px; height:180px; left:0; bottom:120px; transform:translate(-70px,0); }
+.cover .content{ position:relative; z-index:3; }
+.cover .kicker{
+  font-size:13px; font-weight:500; letter-spacing:4.5px; text-transform:uppercase;
+  color:#9db8d8; opacity:.85; margin-bottom:26px;
+}
+.cover .hero{
+  font-size:64px; font-weight:900; line-height:1.08; letter-spacing:-1px;
+  color:#f4f8fd; margin:0 0 14px 0;
+}
+.cover .sub{
+  font-size:21px; font-weight:300; line-height:1.42; color:#c3d5ea;
+  max-width:520px; margin-bottom:34px;
+}
+.cover .summary{
+  font-size:15.5px; font-weight:400; line-height:1.66; color:#a9bfd8;
+  max-width:480px; text-align:left;
+  border-left:3px solid #3f6ba3; padding-left:18px; margin-bottom:44px;
+}
+.cover .chips{ display:flex; flex-wrap:wrap; gap:10px; max-width:100%; }
+.cover .chip{
+  flex:0 1 auto; min-width:60px; max-width:100%;
+  border:1px solid rgba(120,165,215,.30); border-radius:999px;
+  padding:7px 16px; font-size:12.5px; font-weight:600; color:#cfe0f2;
+  background:rgba(42,82,152,.18); overflow-wrap:break-word;
+}
+.cover .edition{
+  position:absolute; z-index:3; left:64px; right:64px; bottom:58px;
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px;
+  font-size:12px; letter-spacing:2.6px; text-transform:uppercase;
+  color:#8aa5c5; opacity:.75;
+}
+
+/* ═══════════ CUERPO (flujo) ═══════════ */
+.main-content{
+  page:flow;
+  background:var(--c-bg);
+  padding:52px 62px 36px 62px;
+}
+.chapter-header{ break-after:avoid; break-inside:avoid; margin-top:28px; }
+.chapter-header:first-child{ margin-top:0; }
+.sec-tag{
+  font-size:11.5px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:var(--c-mid); margin-bottom:6px;
+}
+.sec-title{
+  font-size:26px; font-weight:800; line-height:1.22; color:var(--c-primary);
+  margin:0 0 6px 0; break-after:avoid;
+}
+.divider{
+  width:52px; height:3px; background:var(--c-mid); border-radius:2px;
+  margin:8px 0 13px 0;
+}
+h3.sub{
+  font-size:17px; font-weight:700; color:var(--c-primary);
+  margin:16px 0 7px 0; break-after:avoid;
+}
+p{ margin:0 0 12px 0; }
+p.lead{ font-size:16px; color:var(--c-text); }
+.muted{ color:var(--c-muted); }
+.small{ font-size:12.5px; }
+strong{ font-weight:700; color:var(--c-primary); }
+
+/* tarjetas */
+.card{
+  break-inside:avoid; background:#ffffff; border:1px solid var(--c-border);
+  border-left:4px solid var(--c-mid); border-radius:12px;
+  padding:15px 18px; margin:0 0 14px 0;
+}
+.card .card-title{
+  font-size:15.5px; font-weight:700; color:var(--c-primary); margin-bottom:5px;
+}
+.card p{ margin:0 0 6px 0; font-size:14px; }
+.card p:last-child{ margin-bottom:0; }
+.card .meta{
+  font-size:12px; color:var(--c-muted);
+  background:var(--c-stripe); border-radius:8px; padding:6px 10px;
+  display:inline-block; margin-top:6px;
+}
+
+/* pasos numerados */
+.step{
+  break-inside:avoid; display:flex; gap:14px; align-items:flex-start;
+  margin-bottom:12px; max-width:100%;
+}
+.step .n{
+  flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+  background:var(--c-primary); color:#fff; font-weight:800; font-size:14px;
+  display:flex; align-items:center; justify-content:center; margin-top:2px;
+}
+.step .t{ flex:1 1 auto; min-width:100px; font-size:14.5px; text-align:left; }
+.step .t b{ color:var(--c-primary); }
+
+/* tablas */
+table{
+  width:100%; border-collapse:collapse; font-size:13px; margin:6px 0 14px 0;
+  background:#fff; border-radius:10px; overflow:hidden;
+}
+table.keep{ break-inside:avoid; }
+thead{ display:table-header-group; }
+tr{ break-inside:avoid; }
+th{
+  background:var(--c-primary); color:#ffffff; font-weight:700;
+  padding:6px 9px; text-align:left; font-size:12.5px;
+}
+td{ padding:6px 9px; border-bottom:1px solid var(--c-border); vertical-align:top; }
+tbody tr:nth-child(odd){ background:var(--c-stripe); }
+tbody tr:nth-child(even){ background:#ffffff; }
+td.c, th.c{ text-align:center; }
+.mayor{ color:var(--c-mid); font-weight:700; }
+.neg{ color:var(--c-muted); }
+
+/* diagrama servidor */
+.diagram{
+  break-inside:avoid; background:#ffffff; border:1px solid var(--c-border);
+  border-radius:14px; padding:18px; margin:4px 0 14px 0; max-width:100%;
+}
+.diagram .hub{
+  width:300px; margin:0 auto 4px auto; background:var(--c-stripe);
+  border:2px solid var(--c-mid); border-radius:12px; text-align:center;
+  padding:12px 10px; font-weight:700; color:var(--c-primary); font-size:14.5px;
+}
+.diagram .hub small{ display:block; font-weight:500; color:var(--c-muted); font-size:11.5px; margin-top:3px; }
+.diagram .wire{
+  text-align:center; color:var(--c-mid); font-size:12px; letter-spacing:2px;
+  margin:6px 0 10px 0; font-weight:600;
+}
+.diagram .devices{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:100%; }
+.diagram .dev{
+  flex:1 1 auto; min-width:120px; max-width:100%;
+  background:#f2f6fc; border:1px solid var(--c-border); border-radius:10px;
+  text-align:center; padding:9px 6px; font-size:12.5px; font-weight:600;
+  color:var(--c-primary); overflow-wrap:break-word;
+}
+.diagram .dev small{ display:block; font-weight:400; color:var(--c-muted); font-size:10.5px; margin-top:2px; }
+
+/* Q&A */
+.faq{ break-inside:avoid; margin-bottom:13px; }
+.faq .q{ font-weight:700; color:var(--c-primary); font-size:14.5px; margin-bottom:3px; }
+.faq .a{ font-size:14px; }
+
+.callout{
+  break-inside:avoid; background:var(--c-stripe); border:1px solid var(--c-border);
+  border-radius:12px; padding:13px 16px; margin:0 0 14px 0; font-size:13.5px;
+}
+.callout b{ color:var(--c-primary); }
+
+/* ═══════════ CIERRE (página fija) ═══════════ */
+.ending{
+  width:720px; height:1020px; box-sizing:border-box;
+  break-before:page; overflow:hidden; position:relative;
+  background:linear-gradient(200deg,#122a45 0%, var(--c-dark) 60%, #0a1828 100%);
+  color:#eaf1fa; display:flex; flex-direction:column; justify-content:center;
+  padding:64px;
+}
+.ending .bg-layer{ position:absolute; inset:0; overflow:hidden; z-index:1; }
+.ending .ring{ position:absolute; border-radius:50%; border:1.5px solid rgba(90,140,200,.14); }
+.ending .r1{ width:380px; height:380px; left:0; top:0; transform:translate(-120px,-110px); }
+.ending .r2{ width:220px; height:220px; right:0; bottom:90px; transform:translate(60px,0); }
+.ending .content{ position:relative; z-index:3; }
+.ending .big{
+  font-size:34px; font-weight:800; line-height:1.25; color:#f4f8fd;
+  margin-bottom:22px; max-width:520px;
+}
+.ending .check{ margin:0 0 34px 0; max-width:520px; }
+.ending .check .item{
+  display:flex; gap:12px; align-items:flex-start; margin-bottom:13px;
+  font-size:14.5px; color:#c3d5ea; text-align:left;
+}
+.ending .check .item .box{
+  flex:0 0 auto; width:20px; height:20px; border-radius:6px; margin-top:2px;
+  background:rgba(90,140,200,.22); border:1.5px solid #5b8cc9;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; color:#bcd4ee; font-weight:800;
+}
+.ending .foot{
+  font-size:12px; letter-spacing:2.6px; text-transform:uppercase;
+  color:#8aa5c5; opacity:.75; border-top:1px solid rgba(90,140,200,.22);
+  padding-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ PORTADA ════════════ -->
+<div class="cover">
+  <div class="bg-layer">
+    <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+  </div>
+  <div class="content">
+    <div class="kicker">Guía de plataforma · versión 2.2.0</div>
+    <h1 class="hero">Ktalogo-Dgital</h1>
+    <div class="sub">Instalación multi-PC, multi-catálogo, multi-usuario y roles</div>
+    <div class="summary">
+      Todo lo necesario para convertir la app en la plataforma de trabajo de tu
+      equipo: las cinco rutas de instalación, el servidor central con código QR,
+      catálogos que se crean desde la propia app y cinco roles con permisos
+      reales, del Super Admin al Cliente.
+    </div>
+    <div class="chips">
+      <div class="chip">5 rutas de instalación</div>
+      <div class="chip">5 roles con permisos</div>
+      <div class="chip">Multi-catálogo</div>
+      <div class="chip">Multi-usuario y multi-tarea</div>
+      <div class="chip">24/24 pruebas OK</div>
+    </div>
+  </div>
+  <div class="edition"><span>Edición Noviembre 2026</span><span>Español · PC · Web · Android</span></div>
+</div>
+
+<!-- ════════════ CUERPO ════════════ -->
+<div class="main-content">
+
+  <!-- ── 01 · INSTALACIÓN MULTI-PC ─────────────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 01</div>
+    <h2 class="sec-title">Cómo instalar la plataforma en otras PCs</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="lead">
+    Ktalogo-Dgital es un solo programa Python que puede vivir en distintos
+    lugares según cómo trabaje tu equipo. La pregunta clave no es «dónde lo
+    instalo», sino «¿dónde viven los datos?». Si cada PC necesita ver las
+    mismas ventas, el mismo saldo y los mismos catálogos, los datos deben ser
+    <strong>uno solo</strong>: eso exige un servidor central; si cada PC
+    trabaja aislada, cada una lleva su propia instalación. Hay cinco rutas
+    posibles y no compiten entre sí: conviene decidir desde el día uno dónde
+    quedará la base de datos (la carpeta <strong>data/</strong>).
+  </p>
+  <p>
+    En este capítulo tienes la comparación completa y el paso a paso de la
+    ruta elegida para tu equipo: el <strong>servidor central</strong>, donde
+    una sola PC guarda los datos y todas las demás entran por navegador.
+  </p>
+
+  <table class="keep">
+    <thead><tr>
+      <th style="width:23%">Ruta</th><th style="width:33%">Qué se hace</th>
+      <th style="width:24%">Ideal para</th><th style="width:20%">Datos</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><b>A · Servidor central</b><br><span class="small neg">recomendada</span></td>
+          <td>Una PC ejecuta <b>INICIAR-WEB.bat</b>; el resto entra por navegador con la IP o escaneando el QR</td>
+          <td>Equipo de trabajo en la misma red (tu caso)</td>
+          <td class="mayor">Únicos y compartidos</td></tr>
+      <tr><td><b>B · Instalación por PC</b></td>
+          <td>INSTALAR.bat en cada PC, base de datos independiente en cada una</td>
+          <td>PCs aisladas, sin red común</td>
+          <td class="neg">Separados por PC</td></tr>
+      <tr><td><b>C · App Android (APK)</b></td>
+          <td>Compilación en la nube con GitHub Actions; el APK se instala en el celular</td>
+          <td>Ventas fuera del local, ferias, calle</td>
+          <td class="neg">Locales del celular</td></tr>
+      <tr><td><b>D · Termux en Android</b></td>
+          <td>INSTALAR-TERMUX.sh: el celular sirve la app a su propio navegador</td>
+          <td>Trabajar solo con el teléfono</td>
+          <td class="neg">Locales del celular</td></tr>
+      <tr><td><b>E · Navegador (todo dispositivo)</b></td>
+          <td>Sin instalar nada: iPhone, tablet, TV u otra PC abren la IP del servidor central</td>
+          <td>Consultas rápidas y vitrina</td>
+          <td class="mayor">Los del servidor</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub">Tu decisión: servidor central (Ruta A), paso a paso</h3>
+  <p>
+    Elegiste que las demás PCs trabajen contra una plataforma común. Con la
+    v2.2.0 el proceso es automático de punta a punta: el mismo instalador que
+    ya usaste deja la PC servidora lista, y las demás PCs no instalan
+    absolutamente nada.
+  </p>
+  <div class="step"><div class="n">1</div><div class="t"><b>Instala una sola vez</b> en la PC que hará de servidor: doble clic en <b>INSTALAR.bat</b>. Él solo corrige el proxy, instala Python si falta, crea el entorno y deja los accesos directos en el Escritorio.</div></div>
+  <div class="step"><div class="n">2</div><div class="t"><b>Abre el servidor</b> con doble clic en <b>INICIAR-WEB.bat</b>. Verás la IP del PC (ejemplo: <b>http://192.168.1.10:8550</b>) y se abrirá un <b>código QR</b> en pantalla.</div></div>
+  <div class="step"><div class="n">3</div><div class="t"><b>Conecta el resto de las PCs</b>: abre el navegador y escribe esa dirección. No hay que instalar nada; cada PC queda «fijada» guardando la dirección en favoritos.</div></div>
+  <div class="step"><div class="n">4</div><div class="t"><b>Conecta celulares y tablets</b>: apunta la cámara al QR y toca el enlace que aparece. Misma red Wi-Fi, cero configuración.</div></div>
+  <div class="step"><div class="n">5</div><div class="t"><b>Permite el acceso en el firewall</b>: la primera vez Windows preguntará «¿Permitir acceso?» — pulsa <b>Sí</b> para que las otras PCs puedan entrar (solo ocurre una vez).</div></div>
+  <div class="step"><div class="n">6</div><div class="t"><b>Crea los usuarios del equipo</b>: entra como <b>superadmin@ktalogo.app</b> y ábrelos en el panel <b>Usuarios</b>, uno por persona y con su rol correcto (capítulo 04).</div></div>
+
+  <div class="callout">
+    <b>¿Y si necesitas acceder desde fuera del local?</b> El servidor central
+    escucha en tu red interna. Para entrar desde internet usa un túnel seguro
+    (Cloudflare Tunnel o Tailscale) y nunca abras el puerto 8550 crudo al
+    mundo: el túnel cifra la conexión y te da una dirección estable.
+  </div>
+
+  <!-- ── 02 · MULTI-CATÁLOGO ───────────────────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 02</div>
+    <h2 class="sec-title">Multi-catálogo: cómo crear más de un catálogo</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="lead">
+    En Ktalogo-Dgital, <strong>una tienda = un catálogo</strong>. Cada tienda
+    tiene su propia vitrina pública con enlace y QR independientes, sus
+    productos con sus precios, sus pedidos, su plan y su ubicación en el mapa.
+    Crear «otro catálogo» es, literalmente, crear otra tienda: en segundos la
+    app la agrega al selector y puedes alternar entre ellas sin cerrar sesión.
+  </p>
+  <p>
+    Ya vienen tres catálogos de demostración (Ktalogo Store Caracas, Farmacia
+    La Salud y Agro Campo) para que veas el concepto funcionando. Puedes
+    renombrarlos o borrar su contenido y empezar de cero: son tuyos.
+  </p>
+
+  <h3 class="sub">Tres formas de crear un catálogo</h3>
+  <div class="card">
+    <div class="card-title">➕ Nueva tienda (desde cero)</div>
+    <p><b>Ajustes → Multi-catálogo → Nueva tienda</b>. Le pones nombre y
+    descripción y la app la crea al instante; quedas operando dentro de ella
+    para cargar sus productos.</p>
+    <div class="meta">La crea: Administrador y Super Admin · respeta el cupo del plan · el Super Admin no tiene límite</div>
+  </div>
+  <div class="card">
+    <div class="card-title">⧉ Duplicar catálogo (modo revendedor)</div>
+    <p><b>Catálogo → Duplicar catálogo</b>. Copia todos tus productos activos a
+    otra tienda propia, respetando el cupo de la destino: ideal para montar un
+    catálogo de revendedor o una segunda sucursal con el mismo inventario base.</p>
+    <div class="meta">Requiere plan Avanzado o superior · disponible para Admin, Editor y Super Admin</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🗺️ Registrar negocio en el mapa</div>
+    <p><b>Mapa → Registrar negocio en el mapa</b>. Crea la tienda ya
+    geolocalizada con su punto en el mapa público, útil para negocio nuevo con
+    ubicación física.</p>
+    <div class="meta">La crea: Administrador y Super Admin</div>
+  </div>
+
+  <h3 class="sub">¿Cuántos catálogos puedo tener?</h3>
+  <p>
+    El límite lo pone el plan de la tienda, y para una plataforma mediana
+    (5–15 catálogos) lo natural es que el <strong>Super Admin</strong> —que no
+    tiene límite— sea quien cree las tiendas y las asigne. Los planes de la
+    app se comportan así:
+  </p>
+  <table class="keep">
+    <thead><tr><th>Plan</th><th class="c">Tiendas</th><th class="c">Productos</th><th class="c">Sucursales</th></tr></thead>
+    <tbody>
+      <tr><td>Gratis</td><td class="c">1</td><td class="c">25</td><td class="c">1</td></tr>
+      <tr><td>Emprendedor</td><td class="c">1</td><td class="c">250</td><td class="c">1</td></tr>
+      <tr><td>Intermedio</td><td class="c">1</td><td class="c">500</td><td class="c">2</td></tr>
+      <tr><td>Avanzado</td><td class="c">2</td><td class="c">1.000</td><td class="c">4</td></tr>
+      <tr><td>Pro</td><td class="c">4</td><td class="c">Sin límite</td><td class="c">Sin límite</td></tr>
+      <tr><td>Enterprise</td><td class="c mayor">Sin límite</td><td class="c">Sin límite</td><td class="c">Sin límite</td></tr>
+    </tbody>
+  </table>
+  <p class="small muted">
+    Para cambiar de tienda sin cerrar sesión usa el selector <b>⇄</b> del
+    appbar (aparece cuando tienes más de una): catálogo, pedidos y saldo
+    siempre apuntan a la tienda activa.
+  </p>
+
+  <!-- ── 03 · MULTI-USUARIO Y MULTI-TAREA ──────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 03</div>
+    <h2 class="sec-title">Multi-usuario y multi-tarea: cómo funciona</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="lead">
+    Sí, la plataforma es multi-usuario y multi-tarea de forma nativa. En modo
+    servidor web, <strong>cada pestaña o ventana del navegador es una sesión
+    independiente</strong>, con su propio usuario y su propio estado. Dos
+    personas pueden estar editando catálogos distintos a la vez; una tercera
+    puede estar revisando pedidos en su celular; y ninguna interfiere con las
+    demás, porque la sesión no vive en el servidor sino en el navegador de
+    cada quien.
+  </p>
+  <div class="diagram">
+    <div class="hub">🖥️ PC SERVIDOR · INICIAR-WEB.bat<small>una sola base de datos (data/) · todo sincronizado</small></div>
+    <div class="wire">· · · misma red Wi-Fi · puerto 8550 · · ·</div>
+    <div class="devices">
+      <div class="dev">💻 PC Administración<small>sesión Super Admin</small></div>
+      <div class="dev">💻 PC Local<small>sesión Editor</small></div>
+      <div class="dev">📱 Celular<small>sesión Admin</small></div>
+      <div class="dev">📱 Celular cliente<small>vitrina + compra</small></div>
+    </div>
+  </div>
+  <p>
+    Lo que se comparte es la <strong>base de datos</strong>: cuando el Editor
+    guarda un producto y el Admin recarga su pantalla, ya lo ve. Las
+    operaciones críticas (confirmar un pedido, mover saldo, registrar una
+    remesa) quedan ancladas en la blockchain local con su sello de tiempo, así
+    que queda registro de quién hizo qué y cuándo.
+  </p>
+  <p>
+    <strong>Límites prácticos.</strong> Para tu escala (5–15 catálogos, hasta
+    25 usuarios) una PC normal como servidor sobra: la app es liviana, corre
+    con poca señal y no necesita Docker ni servicios externos. Lo único que
+    exige el modo servidor es que la PC servidora esté encendida mientras el
+    equipo trabaja, y que todos estén en la misma red (o conectados por el
+    túnel del capítulo 01). Si un día la operación crece mucho, los datos
+    migran solos de JSON a SQLite y, si hiciera falta más adelante, el mismo
+    motor acepta PostgreSQL o MySQL por configuración sin cambiar el código.
+  </p>
+
+  <!-- ── 04 · LOS 5 ROLES ──────────────────────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 04</div>
+    <h2 class="sec-title">Los cinco roles: quién hace qué</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="lead">
+    La v2.2.0 implementa control de acceso por roles (RBAC): la navegación y
+    los botones se adaptan solos a cada rol, y las rutas prohibidas se
+    bloquean incluso si alguien escribe la URL a mano. El auto-registro
+    público crea siempre cuentas <strong>Cliente</strong>; las cuentas del
+    equipo las crea el Super Admin en el panel <strong>Usuarios</strong>.
+    Cada rol tiene una cuenta demo lista para que la pruebes hoy mismo.
+  </p>
+
+  <div class="card">
+    <div class="card-title">👑 Super Admin — dueño de la plataforma</div>
+    <p>Ve y opera <b>todas las tiendas</strong> con el selector ⇄. Es el único
+    que administra usuarios: crea cuentas, cambia roles, desactiva a alguien
+    que dejó el equipo (sin borrar su historial) y consulta la blockchain de
+    auditoría. También decide planes y puede crear catálogos sin límite.</p>
+    <div class="meta">Demo: superadmin@ktalogo.app · super1234</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🛠️ Administrador — gerente de su tienda</div>
+    <p>El rol del día a día del negocio: catálogo completo (crear, editar,
+    borrar, duplicar), pedidos con sus estados, saldo y retiros, remesas,
+    pasarelas de pago, planes y ajustes de <b>sus</b> tiendas. No ve las
+    tiendas de otros ni administra usuarios.</p>
+    <div class="meta">Demo: admin@ktalogo.app · demo1234</div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ Editor — equipo de contenido</div>
+    <p>Carga y edita productos, mueve el orden de categorías, duplica
+    elementos y gestiona el estado de los pedidos (confirmar, enviar,
+    entregar). El límite es claro: <b>no toca dinero</b> (sin saldo, sin
+    remesas, sin pagos) y no entra a Ajustes ni al panel de usuarios. No puede
+    borrar productos.</p>
+    <div class="meta">Demo: editor@ktalogo.app · editor1234</div>
+  </div>
+  <div class="card">
+    <div class="card-title">👁️ Visualizador — solo lectura</div>
+    <p>Para socios, contadores, supervisión o auditoría: mira inicio, catálogo,
+    pedidos y analíticas, y puede exportar a PDF/DOC/TXT. Los botones de
+    crear, editar y borrar simplemente no existen en su pantalla; es
+    imposible que modifique algo por descuido.</p>
+    <div class="meta">Demo: visualizador@ktalogo.app · visual1234</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🛒 Cliente — compra</div>
+    <p>Al entrar aterriza directo en la vitrina pública: navega, arma su
+    carrito y hace pedidos que quedan ligados a su cuenta. En «Mis pedidos»
+    ve únicamente los suyos con su estado en vivo, y en «Saldo» gestiona su
+    propia billetera. No ve ningún módulo interno del negocio.</p>
+    <div class="meta">Demo: cliente@demo.app · cliente123</div>
+  </div>
+
+  <!-- ── 05 · MATRIZ DE PERMISOS ───────────────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 05</div>
+    <h2 class="sec-title">Matriz de permisos por módulo</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="lead">
+    Esta es la matriz completa que aplica la app módulo por módulo.
+    <strong>✓</strong> = acceso total · <strong>leer</strong> = solo lectura ·
+    <strong>suyos</strong> = únicamente sus propios registros ·
+    <strong>—</strong> = sin acceso (la ruta ni siquiera aparece en su menú).
+  </p>
+  <table>
+    <thead><tr>
+      <th>Módulo</th><th class="c">👑</th><th class="c">🛠️</th><th class="c">✏️</th><th class="c">👁️</th><th class="c">🛒</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Inicio (dashboard)</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c">leer</td><td class="c neg">—</td></tr>
+      <tr><td>Catálogo</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c">crear/editar</td><td class="c">leer</td><td class="c neg">—</td></tr>
+      <tr><td>Pedidos</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c">leer</td><td class="c">suyos</td></tr>
+      <tr><td>Saldo / billetera</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td><td class="c">suyo</td></tr>
+      <tr><td>Remesas</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td><td class="c neg">—</td></tr>
+      <tr><td>Pasarelas de pago</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td><td class="c neg">—</td></tr>
+      <tr><td>Planes</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td><td class="c neg">—</td></tr>
+      <tr><td>Analíticas</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c">leer</td><td class="c neg">—</td></tr>
+      <tr><td>Mapa de negocios</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c">leer</td><td class="c neg">—</td></tr>
+      <tr><td>Asistente IA</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td></tr>
+      <tr><td>Ajustes</td><td class="c mayor">✓</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td><td class="c neg">—</td></tr>
+      <tr><td>Usuarios y roles</td><td class="c mayor">✓</td><td class="c neg">—</td><td class="c neg">—</td><td class="c neg">—</td><td class="c neg">—</td></tr>
+    </tbody>
+  </table>
+  <p class="small muted">
+    Dentro del catálogo hay una segunda capa: el Editor no puede borrar
+    productos, y duplicar catálogo completo exige plan Avanzado+. El panel
+    Usuarios verifica el rol dos veces (menú y URL) y protege al propio
+    Super Admin: nadie puede quitarse su propio rol, desactivarse a sí mismo
+    ni dejar la plataforma sin un Super Admin activo.
+  </p>
+
+  <!-- ── 06 · SEGURIDAD ────────────────────────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 06</div>
+    <h2 class="sec-title">Seguridad y buenas prácticas de la plataforma</h2>
+    <div class="divider"></div>
+  </div>
+  <p class="lead">
+    Una plataforma de trabajo con varias personas entrando a la vez merece
+    una rutina de higiene simple. Nada de lo siguiente requiere conocimientos
+    técnicos: son cinco minutos al mes que evitan el 95&nbsp;% de los
+    sustos.
+  </p>
+  <div class="step"><div class="n">1</div><div class="t"><b>Una persona, una cuenta.</b> Evita la cuenta compartida: si algo sale mal, la blockchain y el registro de sesiones te dicen quién fue. El Super Admin crea cuentas ilimitadas y gratis.</div></div>
+  <div class="step"><div class="n">2</div><div class="t"><b>Contraseñas temporales que caducan.</b> Al crear una cuenta de equipo, márcale a la persona cambiarla en Ajustes → Perfil el primer día.</div></div>
+  <div class="step"><div class="n">3</div><div class="t"><b>Desactivar en lugar de borrar.</b> Cuando alguien deja el equipo, desactívalo: su historial y sus pedidos siguen existiendo para consulta, pero su acceso se corta al instante.</div></div>
+  <div class="step"><div class="n">4</div><div class="t"><b>Copia de seguridad mensual.</b> Ajustes → Datos → «Backup JSON» exporta todo (catálogos, usuarios, blockchain) a un archivo que puedes guardar en un pendrive o en la nube.</div></div>
+  <div class="step"><div class="n">5</div><div class="t"><b>Sin internet crudo.</b> La plataforma vive bien en tu red interna; si necesitas acceso externo, túnel cifrado (capítulo 01) y nada de puertos abiertos al mundo.</div></div>
+  <div class="callout">
+    <b>Blindaje extra:</b> en el archivo <b>.env</b> puedes activar
+    <b>KTALOGO_2FA=1</b> para exigir un segundo factor por correo en cada
+    inicio de sesión del equipo. Los códigos llegan por SMTP si lo
+    configuras, o al buzón interno de la app si no.
+  </div>
+
+  <!-- ── 07 · FAQ ──────────────────────────────────────────────── -->
+  <div class="chapter-header">
+    <div class="sec-tag">Capítulo 07</div>
+    <h2 class="sec-title">Preguntas frecuentes</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Puedo instalar en las otras PCs Y tener servidor central a la vez?</div>
+    <div class="a">Sí. La Ruta B (instalación por PC) coexiste con la Ruta A: solo recuerda que cada instalación tiene su propia base de datos. La recomendación es mantener UNA sola base para evitar datos descuadrados, y usar las demás PCs como navegadores.</div>
+  </div>
+  <div class="faq">
+    <div class="q">El celular del vendedor está fuera del local, ¿ve lo mismo?</div>
+    <div class="a">En la misma red Wi-Fi, sí. Desde fuera, usa el túnel (Cloudflare/Tailscale) o instálale la app APK (Ruta C): lleva su propia copia y sincroniza cuando vuelva a la red del local exportando/importando.</div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Qué pasa si el servidor central se apaga?</div>
+    <div class="a">Las demás PCs dejan de ver la app hasta que vuelva a encenderse: los datos viven ahí. Nada se pierde, porque todo se guarda al momento en data/. Enciende la PC, doble clic en INICIAR-WEB.bat y todos recargan su navegador.</div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Puedo tener dos Super Admin?</div>
+    <div class="a">Sí, y es recomendable por continuidad: el sistema solo exige que exista al menos uno activo. Desde el panel Usuarios, cambia el rol de otra cuenta a Super Admin y listo.</div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Los clientes necesitan cuenta para comprar?</div>
+    <div class="a">No: la vitrina pública funciona sin login y el pedido por carrito pide solo nombre y teléfono. La cuenta Cliente añade lo cómodo: «Mis pedidos» con estado en vivo y su propia billetera de saldo.</div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Puedo cambiarle el rol a alguien después de crearle la cuenta?</div>
+    <div class="a">Sí, en cualquier momento: el Super Admin abre el panel Usuarios, cambia el rol en el desplegable de esa persona y el cambio aplica al instante — su menú y sus botones se ajustan en su próxima recarga, sin volver a crear nada.</div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Cuántas PCs pueden entrar al mismo tiempo?</div>
+    <div class="a">No hay límite artificial: cada navegador abierto es una sesión. Para tu escala (hasta 25 usuarios) una PC doméstica como servidor sobra; la app fue diseñada para funcionar con poca señal y recursos mínimos.</div>
+  </div>
+  <div class="faq">
+    <div class="q">¿Y si mi internet se cae?</div>
+    <div class="a">El servidor central es local: mientras las PCs estén en la misma red, la plataforma funciona igual con o sin internet. Solo pierdes la tasa BCV en vivo (usa su caché) y las funciones opcionales de IA y correo.</div>
+  </div>
+  <p class="small muted">
+    Para detalles técnicos paso a paso tienes además <b>docs/INSTALACION.md</b>
+    (cinco rutas de instalación), <b>docs/GUIA_APK.md</b> (app Android nativa) y
+    <b>ACTUALIZACION-2.2.0.md</b> (qué cambió exactamente en esta versión y
+    cómo actualizar desde v2.1.0 sin perder datos).
+  </p>
+
+</div><!-- /main-content -->
+
+<!-- ════════════ CIERRE ════════════ -->
+<div class="ending">
+  <div class="bg-layer"><div class="ring r1"></div><div class="ring r2"></div></div>
+  <div class="content">
+    <div class="big">Tu plataforma de trabajo, lista hoy.</div>
+    <div class="check">
+      <div class="item"><span class="box">✓</span><span>INSTALAR.bat en la PC servidora (una sola vez)</span></div>
+      <div class="item"><span class="box">✓</span><span>INICIAR-WEB.bat y comparte el QR con el equipo</span></div>
+      <div class="item"><span class="box">✓</span><span>Entra como Super Admin y crea los usuarios con su rol</span></div>
+      <div class="item"><span class="box">✓</span><span>Crea tus catálogos: Ajustes → Multi-catálogo → Nueva tienda</span></div>
+      <div class="item"><span class="box">✓</span><span>Backup mensual: Ajustes → Datos → Backup JSON</span></div>
+    </div>
+    <div class="foot"><span>Ktalogo-Dgital v2.2.0</span><span>Guía de plataforma · 2026</span></div>
+  </div>
+</div>
+
+</body>
+</html>

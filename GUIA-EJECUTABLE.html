@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ktalogo-Dgital · Guía del ejecutable v3.0.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ PÁGINA ═══════════ */
+@page { size: 720px 1020px; margin: 0; }
+@page flow { margin: 48px 0 44px 0; }
+
+:root{
+  --c-dark:   #0e1f33;  /* portada / cierre (XL, oscuro)        */
+  --c-primary:#1a365d;  /* titulares, tabla header (M)          */
+  --c-mid:    #2a5298;  /* acento, enlaces, números (S/XS)      */
+  --c-bg:     #f5f8fc;  /* fondo del cuerpo (XL, claro)         */
+  --c-stripe: #eef3fa;  /* franjas de tabla (L)                 */
+  --c-border: #d8e2f0;  /* bordes (S)                           */
+  --c-text:   #24303e;
+  --c-muted:  #5c6c80;
+  --c-ok:     #1e7a46;
+}
+html, body{
+  margin:0; padding:0; width:720px;
+  background:var(--c-bg);
+  color:var(--c-text);
+  font-family:'Inter','Noto Sans SC','DejaVu Sans',sans-serif;
+  font-size:15.5px; line-height:1.62;
+  line-break:strict; word-break:normal; overflow-wrap:break-word;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+@media screen{
+  html{ height:auto; display:flex; justify-content:center; background:#0a1626; }
+  body{ transform-origin:top center; margin:16px auto; box-shadow:0 8px 40px rgba(0,0,0,.5); }
+}
+.cover, .ending{ box-shadow:0 0 0 2px var(--c-dark); }
+p, td, li{ line-break:strict; text-align:justify; }
+img, svg{ max-width:100%; height:auto; }
+
+/* ═══════════ PORTADA (página fija) ═══════════ */
+.cover{
+  width:720px; height:1020px; box-sizing:border-box;
+  break-after:page; overflow:hidden; position:relative;
+  background:linear-gradient(160deg,#122a45 0%, var(--c-dark) 58%, #0a1828 100%);
+  color:#eaf1fa; display:flex; flex-direction:column; justify-content:center;
+  padding:64px;
+}
+.cover .bg-layer{ position:absolute; inset:0; overflow:hidden; z-index:1; }
+.cover .ring{ position:absolute; border-radius:50%; border:1.5px solid rgba(90,140,200,.16); }
+.cover .r1{ width:430px; height:430px; right:0; top:0; transform:translate(140px,-120px); }
+.cover .r2{ width:300px; height:300px; right:0; top:0; transform:translate(-40px,60px); border-color:rgba(90,140,200,.10); }
+.cover .r3{ width:180px; height:180px; left:0; bottom:120px; transform:translate(-70px,0); }
+.cover .content{ position:relative; z-index:3; }
+.cover .kicker{
+  font-size:13px; font-weight:500; letter-spacing:4.5px; text-transform:uppercase;
+  color:#9db8d8; opacity:.85; margin-bottom:26px;
+}
+.cover .hero{
+  font-size:64px; font-weight:900; line-height:1.08; letter-spacing:-1px;
+  color:#f4f8fd; margin:0 0 14px 0;
+}
+.cover .sub{
+  font-size:21px; font-weight:300; line-height:1.42; color:#c3d5ea;
+  max-width:520px; margin-bottom:34px;
+}
+.cover .summary{
+  font-size:15.5px; font-weight:400; line-height:1.66; color:#a9bfd8;
+  max-width:480px; text-align:left;
+  border-left:3px solid #3f6ba3; padding-left:18px; margin-bottom:44px;
+}
+.cover .chips{ display:flex; flex-wrap:wrap; gap:10px; max-width:100%; }
+.cover .chip{
+  flex:0 1 auto; min-width:60px; max-width:100%;
+  border:1px solid rgba(120,165,215,.30); border-radius:999px;
+  padding:7px 16px; font-size:12.5px; font-weight:600; color:#cfe0f2;
+  background:rgba(42,82,152,.18); overflow-wrap:break-word;
+}
+.cover .edition{
+  position:absolute; z-index:3; left:64px; right:64px; bottom:58px;
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px;
+  font-size:12px; letter-spacing:2.6px; text-transform:uppercase;
+  color:#8aa5c5; opacity:.75;
+}
+
+/* ═══════════ CUERPO (flujo) ═══════════ */
+.main-content{
+  page:flow;
+  background:var(--c-bg);
+  padding:52px 62px 36px 62px;
+}
+.chapter-header{ break-after:avoid; break-inside:avoid; margin-top:28px; }
+.chapter-header:first-child{ margin-top:0; }
+.sec-tag{
+  font-size:11.5px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  color:var(--c-mid); margin-bottom:6px;
+}
+.sec-title{
+  font-size:26px; font-weight:800; line-height:1.22; color:var(--c-primary);
+  margin:0 0 6px 0; break-after:avoid;
+}
+.divider{
+  width:52px; height:3px; background:var(--c-mid); border-radius:2px;
+  margin:8px 0 13px 0;
+}
+h3.sub{
+  font-size:17px; font-weight:700; color:var(--c-primary);
+  margin:16px 0 7px 0; break-after:avoid;
+}
+p{ margin:0 0 12px 0; }
+p.lead{ font-size:16px; color:var(--c-text); }
+.muted{ color:var(--c-muted); }
+.small{ font-size:12.5px; }
+strong{ font-weight:700; color:var(--c-primary); }
+code.k{
+  font-family:'DejaVu Sans Mono',monospace; font-size:12.5px;
+  background:#e8eef8; border:1px solid var(--c-border); border-radius:6px;
+  padding:1px 7px; color:var(--c-primary); white-space:nowrap;
+}
+
+/* tarjetas */
+.card{
+  break-inside:avoid; background:#ffffff; border:1px solid var(--c-border);
+  border-left:4px solid var(--c-mid); border-radius:12px;
+  padding:15px 18px; margin:0 0 14px 0;
+}
+.card .card-title{
+  font-size:15.5px; font-weight:700; color:var(--c-primary); margin-bottom:5px;
+}
+.card p{ margin:0 0 6px 0; font-size:14px; }
+.card p:last-child{ margin-bottom:0; }
+.card .meta{
+  font-size:12px; color:var(--c-muted);
+  background:var(--c-stripe); border-radius:8px; padding:6px 10px;
+  display:inline-block; margin-top:6px;
+}
+.grid2{ display:flex; flex-wrap:wrap; gap:12px; max-width:100%; }
+.grid2 .card{ flex:1 1 280px; min-width:260px; max-width:100%; margin:0; }
+
+/* pasos numerados */
+.step{
+  break-inside:avoid; display:flex; gap:14px; align-items:flex-start;
+  margin-bottom:12px; max-width:100%;
+}
+.step .n{
+  flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+  background:var(--c-primary); color:#fff; font-weight:800; font-size:14px;
+  display:flex; align-items:center; justify-content:center; margin-top:2px;
+}
+.step .t{ flex:1 1 auto; min-width:100px; font-size:14.5px; text-align:left; }
+.step .t b{ color:var(--c-primary); }
+
+/* tablas */
+table{
+  width:100%; border-collapse:collapse; font-size:13px; margin:6px 0 14px 0;
+  background:#fff; border-radius:10px;
+}
+table.keep{ break-inside:avoid; }
+thead{ display:table-header-group; }
+tr{ break-inside:avoid; }
+th{
+  background:var(--c-primary); color:#ffffff; font-weight:700;
+  padding:6px 9px; text-align:left; font-size:12.5px;
+}
+td{ padding:6px 9px; border-bottom:1px solid var(--c-border); vertical-align:top; }
+tbody tr:nth-child(odd){ background:var(--c-stripe); }
+tbody tr:nth-child(even){ background:#ffffff; }
+td.c, th.c{ text-align:center; }
+.mayor{ color:var(--c-mid); font-weight:700; }
+.neg{ color:var(--c-muted); }
+.ok{ color:var(--c-ok); font-weight:700; }
+
+/* diagrama de distribución */
+.diagram{
+  break-inside:avoid; background:#ffffff; border:1px solid var(--c-border);
+  border-radius:14px; padding:18px; margin:4px 0 14px 0; max-width:100%;
+}
+.diagram .hub{
+  width:320px; margin:0 auto 4px auto; background:var(--c-stripe);
+  border:2px solid var(--c-mid); border-radius:12px; text-align:center;
+  padding:12px 10px; font-weight:700; color:var(--c-primary); font-size:14.5px;
+}
+.diagram .hub small{ display:block; font-weight:500; color:var(--c-muted); font-size:11.5px; margin-top:3px; }
+.diagram .wire{
+  text-align:center; color:var(--c-mid); font-size:12px; letter-spacing:2px;
+  margin:6px 0 10px 0; font-weight:600;
+}
+.diagram .devices{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:100%; }
+.diagram .dev{
+  flex:1 1 auto; min-width:130px; max-width:100%;
+  background:#f2f6fc; border:1px solid var(--c-border); border-radius:10px;
+  text-align:center; padding:9px 6px; font-size:12.5px; font-weight:600;
+  color:var(--c-primary); overflow-wrap:break-word;
+}
+.diagram .dev small{ display:block; font-weight:400; color:var(--c-muted); font-size:10.5px; margin-top:2px; }
+
+/* Q&A */
+.faq{ break-inside:avoid; margin-bottom:13px; }
+.faq .q{ font-weight:700; color:var(--c-primary); font-size:14.5px; margin-bottom:3px; }
+.faq .a{ font-size:14px; }
+
+.callout{
+  break-inside:avoid; background:var(--c-stripe); border:1px solid var(--c-border);
+  border-radius:12px; padding:13px 16px; margin:0 0 14px 0; font-size:13.5px;
+}
+.callout b{ color:var(--c-primary); }
+
+/* ═══════════ CIERRE (página fija) ═══════════ */
+.ending{
+  width:720px; height:1020px; box-sizing:border-box;
+  break-before:page; overflow:hidden; position:relative;
+  background:linear-gradient(200deg,#122a45 0%, var(--c-dark) 60%, #0a1828 100%);
+  color:#eaf1fa; display:flex; flex-direction:column; justify-content:center;
+  padding:64px;
+}
+.ending .bg-layer{ position:absolute; inset:0; overflow:hidden; z-index:1; }
+.ending .ring{ position:absolute; border-radius:50%; border:1.5px solid rgba(90,140,200,.14); }
+.ending .r1{ width:380px; height:380px; left:0; top:0; transform:translate(-120px,-110px); }
+.ending .r2{ width:220px; height:220px; right:0; bottom:90px; transform:translate(60px,0); }
+.ending .content{ position:relative; z-index:3; }
+.ending .big{
+  font-size:34px; font-weight:800; line-height:1.25; color:#f4f8fd;
+  margin-bottom:22px; max-width:520px;
+}
+.ending .check{ margin:0 0 34px 0; max-width:520px; }
+.ending .check .item{
+  display:flex; gap:12px; align-items:flex-start; margin-bottom:13px;
+  font-size:14.5px; color:#c3d5ea; text-align:left;
+}
+.ending .check .item .box{
+  flex:0 0 auto; width:20px; height:20px; border-radius:6px; margin-top:2px;
+  background:rgba(90,140,200,.22); border:1.5px solid #5b8cc9;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; color:#bcd4ee; font-weight:800;
+}
+.ending .foot{
+  font-size:12px; letter-spacing:2.6px; text-transform:uppercase;
+  color:#8aa5c5; opacity:.75; border-top:1px solid rgba(90,140,200,.22);
+  padding-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ PORTADA ════════════ -->
+<div class="cover">
+  <div class="bg-layer">
+    <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+  </div>
+  <div class="content">
+    <div class="kicker">Guía del ejecutable · versión 3.0.0</div>
+    <h1 class="hero">Ktalogo-Dgital</h1>
+    <div class="sub">Tu plataforma convertida en un .exe que corre sin instalar nada</div>
+    <div class="summary">
+      Todo lo necesario para convertir la app en KtalogoDgital.exe: qué es un
+      ejecutable y qué gana tu negocio, la matriz completa de requerimientos
+      funcionales que el .exe conserva, la compilación en 1 clic con sus 6 fases,
+      los dos formatos y cuál usar en cada caso, y el cuidado de tus datos.
+    </div>
+    <div class="chips">
+      <div class="chip">2 formatos de .exe</div>
+      <div class="chip">Sin instalar Python</div>
+      <div class="chip">Datos junto al .exe</div>
+      <div class="chip">Modo web con QR incluido</div>
+      <div class="chip">Windows 10/11 64-bit</div>
+      <div class="chip">25/25 pruebas OK</div>
+    </div>
+  </div>
+  <div class="edition"><span>Edición Noviembre 2026</span><span>Español · Windows · Web</span></div>
+</div>
+
+<!-- ════════════ CUERPO ════════════ -->
+<div class="main-content">
+
+<!-- ═══ 01 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 01</div>
+  <div class="sec-title">Qué es un ejecutable y qué gana tu negocio</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">Hasta hoy, para abrir Ktalogo-Dgital cada PC necesitaba tres cosas:
+Python instalado, las dependencias descargadas y la carpeta del proyecto completa.
+El <strong>ejecutable</strong> condensa todo eso en un solo archivo:
+<span class="neg"><code class="k">KtalogoDgital.exe</code></span>. Se copia a un pendrive,
+se pega en cualquier Windows y abre con doble clic. Nada más.</p>
+
+<p>Técnicamente, el asistente <code class="k">CREAR-EJECUTABLE.bat</code> usa
+<strong>PyInstaller</strong> (a través de <code class="k">flet pack</code>, la ruta oficial
+de Flet) para meter en un paquete único tres capas: tu código Python, todas las
+librerías (Flet, ReportLab, Pillow…) y el propio <strong>motor visual de Flet</strong>
+con su icono integrado. El resultado no necesita lectura de registro, no instala
+servicios y no toca el sistema: es una app <strong>portable</strong> en toda la
+extensión de la palabra.</p>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">🎒 Portabilidad total</div>
+    <p>El .exe va en el USB junto a tu carpeta <code class="k">data\</code> y tu negocio
+    abre en la PC del socio, la casa o la feria. Sin instaladores ni soporte técnico.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">🧘 Cero mantenimiento</div>
+    <p>Se acabó el «Python se desactualizó» o «pip falló con el proxy». El .exe lleva
+    todo dentro: lo que compilas hoy funciona igual el año que viene.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">🛡️ Código protegido</div>
+    <p>El .exe empaqueta y compila tu código: nadie lee ni edita los archivos fuente
+    desde la máquina de ventas. Ideal si el equipo lo comparte con terceros.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">⚡ Arranque directo</div>
+    <p>Doble clic y la vitrina está en pantalla, con el icono azul de la «K» en la
+    barra de tareas. Sin consolas de fondo ni ventanas negras.</p>
+  </div>
+</div>
+
+<h3 class="sub">Qué NO cambia con el ejecutable</h3>
+<p>El .exe es <strong>exactamente la misma aplicación</strong>: mismos módulos, misma
+base de datos y mismas reglas de roles. Tu <code class="k">data\</code> sigue siendo
+JSON que migra a SQLite solo cuando crece; el modo web con QR para el celular sigue
+disponible; y el proyecto fuente (Python) sigue siendo tu versión de desarrollo, donde
+preparas las mejoras antes de recompilar. Piénsalo así: <strong>el ejecutable es la
+copia de trabajo, el proyecto Python es el taller</strong>.</p>
+
+<div class="callout"><b>Regla de oro v3.0:</b> compila el .exe desde tu PC principal
+(donde están tus datos y tu <code class="k">.venv</code> probado), y reparte
+<span class="neg">después</span>. Así cada copia sale con la misma versión y el mismo
+comportamiento que ya verificaste.</div>
+
+<!-- ═══ 02 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 02</div>
+  <div class="sec-title">Requerimientos: funcionales y técnicos</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">Antes de compilar conviene saber <strong>qué conserva el ejecutable</strong>
+y <strong>qué necesita la PC destino</strong>. La buena noticia: el .exe no es una
+versión recortada — es la plataforma completa empaquetada.</p>
+
+<h3 class="sub">Matriz funcional · lo que el .exe conserva</h3>
+<table>
+<thead><tr><th>Módulo de la plataforma</th><th>Dentro del .exe</th><th>Detalle</th></tr></thead>
+<tbody>
+<tr><td><b>Catálogo</b> (13 categorías)</td><td class="c ok">✓ Completo</td><td>Variantes, SKU, oferta, mayorista, stickers, IA de descripciones</td></tr>
+<tr><td><b>Vitrina pública</b></td><td class="c ok">✓ Completo</td><td>Modo Revista, plantillas, carrito y pedido por WhatsApp</td></tr>
+<tr><td><b>Pedidos</b></td><td class="c ok">✓ Completo</td><td>Flujo por estados, pedido ligado a cuenta del cliente</td></tr>
+<tr><td><b>Billetera de saldo</b></td><td class="c ok">✓ Completo</td><td>Recargas, cargos y movimientos por usuario</td></tr>
+<tr><td><b>Remesas</b></td><td class="c ok">✓ Completo</td><td>Envíos con comisión, tasa BCV real o de respaldo</td></tr>
+<tr><td><b>Pasarelas</b></td><td class="c ok">✓ Completo</td><td>QvaPay/ZonaPago simuladas; reales si configuras claves</td></tr>
+<tr><td><b>Planes y límites</b></td><td class="c ok">✓ Completo</td><td>Escalera Gratis→Emprendedor→Avanzado→Corporativo</td></tr>
+<tr><td><b>Analíticas</b></td><td class="c ok">✓ Completo</td><td>KPIs y gráficos, exportables</td></tr>
+<tr><td><b>Mapa de negocios</b></td><td class="c ok">✓ Completo</td><td>Registro de comercios y contacto directo</td></tr>
+<tr><td><b>Usuarios y roles (5)</b></td><td class="c ok">✓ Completo</td><td>Super Admin, Admin, Editor, Visualizador, Cliente + RBAC</td></tr>
+<tr><td><b>Blockchain local</b></td><td class="c ok">✓ Completo</td><td>Cadena verificable de operaciones críticas</td></tr>
+<tr><td><b>Modo web + QR</b></td><td class="c ok">✓ Completo</td><td><code class="k">KtalogoDgital.exe --web</code> abre servidor y genera QR para celular</td></tr>
+<tr><td><b>Exportación</b></td><td class="c ok">✓ Completo</td><td>PDF (ReportLab), DOC (python-docx) y TXT a <code class="k">exports\</code></td></tr>
+<tr><td><b>Exportadores de catálogo</b></td><td class="c ok">✓ Completo</td><td>Catálogo de precios, tarjetas 9:16, respaldo JSON</td></tr>
+</tbody>
+</table>
+
+<h3 class="sub">Requisitos técnicos del PC destino</h3>
+<table>
+<thead><tr><th>Requisito</th><th>Mínimo</th><th>Recomendado</th></tr></thead>
+<tbody>
+<tr><td>Sistema operativo</td><td>Windows 10 64-bit</td><td class="mayor">Windows 11 64-bit</td></tr>
+<tr><td>Memoria RAM</td><td>4 GB</td><td class="mayor">8 GB (la app + navegador van holgados)</td></tr>
+<tr><td>Disco (carpeta portable)</td><td>~600 MB libres</td><td class="mayor">1 GB</td></tr>
+<tr><td>Disco (solo para COMPILAR)</td><td colspan="2">~3 GB libres temporales (PyInstaller + motor Flet)</td></tr>
+<tr><td>VC++ Redistributable x64</td><td colspan="2">Casi siempre ya instalado; si no: <span class="neg">aka.ms/vs/17/release/vc_redist.x64.exe</span></td></tr>
+<tr><td>Internet</td><td colspan="2"><b>No</b> para vender (todo es local). Solo para: tasa BCV en vivo, IA y el modo web desde otros equipos</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><b>Nota sobre el peso:</b> el .exe pesa ~250-400 MB porque lleva
+dentro el motor visual de Flet Y el cliente web completo (el que permite que tu celular
+abra la app por QR). Es el precio de «todo en uno» — y aún cabe de sobra en un USB de
+8 GB.</div>
+
+<!-- ═══ 03 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 03</div>
+  <div class="sec-title">Prepara el PC de compilación (2 minutos)</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">Solo la PC donde <strong>compilas</strong> necesita preparación; las PCs
+destino no necesitan nada. Si ya usas la plataforma en tu máquina, el paso 1 ya lo
+tienes hecho.</p>
+
+<div class="step"><div class="n">1</div><div class="t"><b>Ten el proyecto v3.0 en el disco.</b>
+Descomprime el paquete <code class="k">ktalogo-digital-v3.0.0-EJECUTABLE.zip</code> ENCIMA
+de tu carpeta actual (sobrescribe) o clónalo desde GitHub con
+<code class="k">git clone</code>. Verifica que <code class="k">CREAR-EJECUTABLE.bat</code>
+esté en la raíz junto a <code class="k">INSTALAR.bat</code>.</div></div>
+
+<div class="step"><div class="n">2</div><div class="t"><b>Ejecuta INSTALAR.bat una vez</b> (si no
+lo hiciste antes). Crea Python + el entorno <code class="k">.venv</code> con todas las
+dependencias. El asistente del ejecutable <strong>reutiliza ese .venv</strong>, así que
+no duplica descargas.</div></div>
+
+<div class="step"><div class="n">3</div><div class="t"><b>Pasa el Doctor.</b>
+Doble clic en <code class="k">scripts\doctor.py</code> (o ejecútalo): debe decir
+«TODO EN ORDEN» y reportar <code class="k">v3.0.0</code>. Si marca archivos antiguos,
+re-extrae el zip encima.</div></div>
+
+<div class="step"><div class="n">4</div><div class="t"><b>Espacio y antivirus.</b> Deja
+~3 GB libres y, si tu antivirus es celoso, agrega la carpeta del proyecto a sus
+exclusiones <i>por unos minutos</i>: los compiladores generan archivos temporales que
+los antivirus a veces interceptan y eso corta la build a mitad.</div></div>
+
+<div class="callout"><b>¿Y si quiero compilar en una PC nueva?</b> Solo necesita:
+Windows 10/11 64-bit + Python 3.10+ (o ejecutar INSTALAR.bat) + internet para la
+primera descarga. Nada de Flutter ni herramientas gigantes: por eso elegimos la ruta
+PyInstaller para la v3.0.</div>
+
+<!-- ═══ 04 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 04</div>
+  <div class="sec-title">CREAR-EJECUTABLE.bat · las 6 fases</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">Doble clic y espera. El asistente muestra cada fase en pantalla; esto
+es lo que hace por dentro y cuánto tarda (la primera vez descarga más; después queda
+cacheado).</p>
+
+<div class="step"><div class="n">1</div><div class="t"><b>Localiza Python (instantáneo).</b>
+Primero busca el <code class="k">.venv</code> de tu instalación; si no existe, usa el
+Python del sistema (3.10+) o te avisa para que pases antes INSTALAR.bat.</div></div>
+
+<div class="step"><div class="n">2</div><div class="t"><b>Dependencias + PyInstaller (2-4 min).</b>
+Instala <code class="k">requirements.txt</code>, la CLI de Flet
+(<code class="k">flet[cli]</code>) y PyInstaller dentro del mismo .venv. Tu instalación
+de la app no se toca: son herramientas de build.</div></div>
+
+<div class="step"><div class="n">3</div><div class="t"><b>Compila el .exe de un solo archivo (3-6 min).</b>
+<code class="k">flet pack</code> descarga (una vez) el motor de Flet para Windows,
+le <strong>incrusta tu icono</strong> <code class="k">ktalogo.ico</code> y los
+metadatos (nombre, versión 3.0.0, copyright), y produce
+<code class="k">build-exe\onefile\KtalogoDgital.exe</code>.</div></div>
+
+<div class="step"><div class="n">4</div><div class="t"><b>Compila la carpeta portable (3-6 min).</b>
+El mismo proceso con la bandera <code class="k">-D</code> (onedir): en vez de un archivo,
+una carpeta <code class="k">KtalogoDgital\</code> que arranca mucho más rápido porque no
+se auto-descomprime en cada inicio.</div></div>
+
+<div class="step"><div class="n">5</div><div class="t"><b>Ensambla <code class="k">release\</code> (segundos).</b>
+Copia los dos formatos a una carpeta limpia y añade <code class="k">.env.example</code>
+como recordatorio de configuración opcional. Esta carpeta es la que repartes.</div></div>
+
+<div class="step"><div class="n">6</div><div class="t"><b>Resumen y apertura.</b> Te muestra
+los dos resultados, el siguiente paso (copiar <code class="k">data\</code> si quieres
+llevar tus datos) y abre la carpeta <code class="k">release\</code> en el Explorador.</div></div>
+
+<h3 class="sub">Qué encuentras al terminar</h3>
+<table class="keep">
+<thead><tr><th>Archivo en <code class="k">release\</code></th><th>Qué es</th><th>Peso aprox.</th></tr></thead>
+<tbody>
+<tr><td><code class="k">KtalogoDgital-PORTABLE.exe</code></td><td>Un solo archivo: USB y clientes</td><td>250-400 MB</td></tr>
+<tr><td><code class="k">KtalogoDgital-Carpeta\KtalogoDgital.exe</code></td><td>Carpeta portable: arranque rápido y red</td><td>~500-600 MB la carpeta</td></tr>
+<tr><td><code class="k">.env.example</code></td><td>Plantilla de configuración opcional (IA, correo, pagos)</td><td>2 KB</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><b>Si algo falla:</b> el asistente pintará el motivo en rojo con
+remedios concretos (antivirus, espacio, reintento). Reintenta una segunda pasada antes
+de sospechar lo peor: PyInstaller a veces tropieza con archivos temporales de la pasada
+anterior.</div>
+
+<!-- ═══ 05 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 05</div>
+  <div class="sec-title">Los 2 formatos y cuál usar en cada caso</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">Ambos formatos contienen <strong>exactamente la misma aplicación</strong>
+y leen los mismos datos. La diferencia es cómo se empaquetan y cómo arrancan.</p>
+
+<table class="keep">
+<thead><tr><th>Criterio</th><th>1 solo .exe (onefile)</th><th>Carpeta portable (onedir)</th></tr></thead>
+<tbody>
+<tr><td>Peso en disco</td><td>~250-400 MB en 1 archivo</td><td>~500-600 MB en carpeta</td></tr>
+<tr><td>Arranque</td><td>3-6 s (se auto-descomprime)</td><td class="mayor">1-2 s (directo)</td></tr>
+<tr><td>Distribución</td><td class="mayor">Perfecto: 1 archivo = 1 copia</td><td>Hay que copiar la carpeta entera</td></tr>
+<tr><td>Red local (carpeta compartida)</td><td>Funciona, arranque algo lento por red</td><td class="mayor">Ideal: el servidor de archivos sirve rápido</td></tr>
+<tr><td>Riesgo de «falta un archivo»</td><td class="mayor">Cero (todo dentro)</td><td>Bajo, si copias la carpeta completa</td></tr>
+<tr><td>Antivirus</td><td>Más escaneo (archivo grande comprimido)</td><td class="mayor">Menos escaneo</td></tr>
+<tr><td>Uso recomendado</td><td>USB, envío por nube, clientes externos</td><td>PC fija del local, red interna o servidor</td></tr>
+</tbody>
+</table>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">USB / llevar a casa del socio</div>
+    <p>Copia <code class="k">KtalogoDgital-PORTABLE.exe</code> + tu carpeta
+    <code class="k">data\</code> al USB. En la otra PC: pega ambos en una carpeta y
+    doble clic. Tus productos y usuarios ya están ahí.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">PC fija o red del local</div>
+    <p>Pega <code class="k">KtalogoDgital-Carpeta\</code> en la PC o en el disco
+    compartido y crea un acceso directo al .exe interno. Arranca en 1-2 s todas
+    las veces que quieras.</p>
+  </div>
+</div>
+
+<h3 class="sub">Flujo de distribución de la v3.0</h3>
+<div class="diagram">
+  <div class="hub">CREAR-EJECUTABLE.bat<small>compila y ensambla release\</small></div>
+  <div class="wire">▼ &nbsp; release\ &nbsp; ▼</div>
+  <div class="devices">
+    <div class="dev">PORTABLE.exe<small>USB, nube o clientes</small></div>
+    <div class="dev">KtalogoDgital-Carpeta\<small>local o red interna</small></div>
+    <div class="dev">+ data\<small>tus datos (opcional)</small></div>
+  </div>
+</div>
+
+<div class="callout"><b>Modo web desde el .exe:</b> ejecuta
+<code class="k">KtalogoDgital.exe --web</code> (o crea un acceso directo con ese
+parámetro): el ejecutable abre el servidor, genera el QR y tu celular/tablet entra
+desde el navegador. Mismo comportamiento que INICIAR-WEB, pero sin Python.</div>
+
+<!-- ═══ 06 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 06</div>
+  <div class="sec-title">Tus datos: dónde viven y cómo se mueven</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">La decisión técnica más importante de la v3.0 es donde el ejecutable
+guarda la información. Regla: <strong>los datos siempre junto al .exe, nunca dentro</strong>.</p>
+
+<h3 class="sub">La anatomía de tu copia de trabajo</h3>
+<table class="keep">
+<thead><tr><th>Ruta</th><th>Qué es</th><th>¿Copiar a otra PC?</th></tr></thead>
+<tbody>
+<tr><td><code class="k">data\</code></td><td>Base de datos JSON/SQLite, blockchain, QR web — <b>tu negocio entero</b></td><td class="ok">Sí, para llevar tus datos</td></tr>
+<tr><td><code class="k">exports\</code></td><td>PDF/DOC/TXT generados (se regeneran solos)</td><td class="neg">Opcional</td></tr>
+<tr><td><code class="k">.env</code></td><td>Claves opcionales (IA, correo SMTP, pagos reales)</td><td class="ok">Sí, si configuraste claves</td></tr>
+<tr><td><code class="k">KtalogoDgital.exe</code></td><td>La app empaquetada (no guarda nada dentro)</td><td class="ok">Siempre</td></tr>
+</tbody>
+</table>
+
+<p>El ejecutable <strong>crea</strong> <code class="k">data\</code> y
+<code class="k">exports\</code> en su carpeta si no existen (siembra los 5 usuarios
+demo la primera vez). Si copias una <code class="k">data\</code> existente al lado,
+la usa tal cual: productos, clientes, saldos y cadena blockchain intactos. Este
+comportamiento lo verificamos compilando el ejecutable en el sandbox y comprobando
+que escribe <i>junto al binario</i>, nunca en carpetas temporales.</p>
+
+<h3 class="sub">Actualizar el .exe cuando salga una versión nueva</h3>
+<div class="step"><div class="n">1</div><div class="t"><b>Actualiza el proyecto</b> (zip
+nuevo encima, o <code class="k">git pull</code> si usas GitHub). Tu
+<code class="k">data\</code> no se toca.</div></div>
+<div class="step"><div class="n">2</div><div class="t"><b>Recompila</b> con
+<code class="k">CREAR-EJECUTABLE.bat</code>. En 6-12 min tienes el .exe de la versión
+nueva con tu mismo .venv.</div></div>
+<div class="step"><div class="n">3</div><div class="t"><b>Reparte</b>: sustituye el .exe
+en cada PC manteniendo la <code class="k">data\</code> local de cada una. Listo.</div></div>
+
+<div class="callout"><b>Conexión con GitHub (si ya subes tu código):</b> además de
+compilar local, puedes clonar el proyecto en cualquier PC con
+<code class="k">git clone</code> + INSTALAR.bat y compilar ahí mismo. Y el APK de
+Android ya se construye en la nube con GitHub Actions — el ejecutable de Windows
+podría seguir el mismo camino si algún día quieres compilar sin PC local.</div>
+
+<!-- ═══ 07 ═══ -->
+<div class="chapter-header">
+  <div class="sec-tag">Capítulo 07</div>
+  <div class="sec-title">Solución de problemas y checklist final</div>
+  <div class="divider"></div>
+</div>
+
+<p class="lead">Los sustos del ejecutable son pocos y siempre tienen la misma cura.
+Estos son los cinco que verás alguna vez.</p>
+
+<div class="faq"><div class="q">Windows dice «Protegió tu PC» (SmartScreen) y no abre</div>
+<div class="a">Es el filtro de apps sin firma digital, no un virus: pulsa
+<b>Más información → Ejecutar de todas formas</b>. Solo pasa la primera vez por .exe.</div></div>
+
+<div class="faq"><div class="q">El antivirus borró o bloqueó el .exe</div>
+<div class="a">Restaura el archivo desde la cuarentena y agrega la carpeta
+<code class="k">release\</code> (o el .exe) a las <b>exclusiones</b> del antivirus.
+Los ejecutables de PyInstaller sin firma son sospechosos habituales para los
+antivirus celosos; con la exclusión, problema resuelto.</div></div>
+
+<div class="faq"><div class="q">El .exe no abre y pide «VCRUNTIME140.dll» o similar</div>
+<div class="a">Falta el runtime de C++ de Microsoft (Windows lo trae casi siempre).
+Instala <b>VC++ Redistributable x64</b> desde
+<span class="neg">aka.ms/vs/17/release/vc_redist.x64.exe</span> y reintenta.</div></div>
+
+<div class="faq"><div class="q">La primera apertura tarda demasiado</div>
+<div class="a">El formato de 1 archivo se auto-descomprime en cada arranque
+(3-6 s normales; en USB 2.0 hasta 10 s). Para uso diario usa el formato
+<b>carpeta portable</b>, que arranca en 1-2 s.</div></div>
+
+<div class="faq"><div class="q">«Puerto 8550 ocupado» al usar el modo web</div>
+<div class="a">Otro proceso lo usa (quizá una INICIAR-WEB anterior). Ejecuta con otro
+puerto: <code class="k">KtalogoDgital.exe --web --port 8560</code>. El QR se genera
+con la URL correcta automáticamente.</div></div>
+
+<div class="faq"><div class="q">Compilé pero <code class="k">release\</code> está vacía</div>
+<div class="a">La build falló en las fases 3-4: sube en la consola roja el motivo real
+(antivirus, disco lleno, pip sin internet). Resuelto eso, vuelve a ejecutar el
+asistente — es seguro reintentar, limpia su basura solo.</div></div>
+
+<div class="faq"><div class="q">¿Puedo compilar sin internet?</div>
+<div class="a">La <b>primera</b> compilación necesita internet (descarga el motor de Flet
+y las librerías una sola vez). Después quedan cacheadas en tu PC: las siguientes
+compilaciones funcionan offline. Actualizar la app sí requerirá conexión otra vez
+porque llega una versión nueva de librerías.</div></div>
+
+<h3 class="sub">Checklist de verificación del .exe (5 minutos)</h3>
+<p>Después de cada compilación, pasa esta lista en la PC de origen antes de repartir.
+Si los 10 pasan, la copia es buena.</p>
+<div class="step"><div class="n">1</div><div class="t">Doble clic: abre la ventana con el icono azul de la K y el modo oscuro de siempre.</div></div>
+<div class="step"><div class="n">2</div><div class="t">Login con <code class="k">superadmin@ktalogo.app / super1234</code>: entra como 👑 Super Admin.</div></div>
+<div class="step"><div class="n">3</div><div class="t">Catálogo: se ven tus categorías y productos (si copiaste <code class="k">data\</code>) o los demo.</div></div>
+<div class="step"><div class="n">4</div><div class="t">Crea un producto de prueba y edítalo: escritura de datos funcionando.</div></div>
+<div class="step"><div class="n">5</div><div class="t">Cierra y abre de nuevo: el producto sigue ahí (persistencia junto al .exe).</div></div>
+<div class="step"><div class="n">6</div><div class="t">Login como cliente: ve «Mis pedidos» y SU saldo, sin menús de administración.</div></div>
+<div class="step"><div class="n">7</div><div class="t"><code class="k">KtalogoDgital.exe --web</code>: URL + QR visibles y entrada desde el celular.</div></div>
+<div class="step"><div class="n">8</div><div class="t">Exporta un catálogo a PDF: aparece en <code class="k">exports\</code> y abre bien.</div></div>
+<div class="step"><div class="n">9</div><div class="t">Ajustes → Usuarios: los 5 roles operan (cambia uno de prueba).</div></div>
+<div class="step"><div class="n">10</div><div class="t">Copia .exe + <code class="k">data\</code> a un USB y pruébalo en una segunda PC.</div></div>
+
+<h3 class="sub">Los comandos de la v3.0 de un vistazo</h3>
+<table class="keep">
+<thead><tr><th>Tarea</th><th>Cómo se hace</th></tr></thead>
+<tbody>
+<tr><td>Crear el ejecutable</td><td>Doble clic en <code class="k">CREAR-EJECUTABLE.bat</code> → carpeta <code class="k">release\</code></td></tr>
+<tr><td>Abrir en escritorio</td><td>Doble clic en <code class="k">KtalogoDgital.exe</code> (o acceso directo)</td></tr>
+<tr><td>Modo web con QR</td><td><code class="k">KtalogoDgital.exe --web</code> · otro puerto: <code class="k">--web --port 8560</code></td></tr>
+<tr><td>Verificar el sistema</td><td>Doble clic en <code class="k">scripts\doctor.py</code> (reporta modo y carpeta de datos)</td></tr>
+<tr><td>Regenerar el icono</td><td><code class="k">python scripts/hacer_icono.py</code> → <code class="k">ktalogo.ico</code></td></tr>
+<tr><td>Volver al modo taller</td><td><code class="k">INICIAR.bat</code> (proyecto Python, donde preparas mejoras)</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><b>Recuerda:</b> la primera compilación es la lenta (descarga el
+motor de Flet una vez). Guarda el <code class="k">.venv</code> y no lo borres: las
+compilaciones siguientes tardan la mitad.</div>
+
+</div><!-- /main-content -->
+
+<!-- ════════════ CIERRE ════════════ -->
+<div class="ending">
+  <div class="bg-layer">
+    <div class="ring r1"></div><div class="ring r2"></div>
+  </div>
+  <div class="content">
+    <div class="big">Doble clic.<br>Compila.<br>Vende.</div>
+    <div class="check">
+      <div class="item"><div class="box">✓</div><div><b>CREAR-EJECUTABLE.bat</b> genera los 2 formatos en <code style="font-size:13px;">release\</code></div></div>
+      <div class="item"><div class="box">✓</div><div>Tus datos viven en <code style="font-size:13px;">data\</code> junto al .exe — cópialos contigo</div></div>
+      <div class="item"><div class="box">✓</div><div>SmartScreen y antivirus se curan con 2 clics (capítulo 07)</div></div>
+      <div class="item"><div class="box">✓</div><div>El proyecto Python sigue siendo tu taller: mejora ahí y recompila</div></div>
+    </div>
+    <div class="foot">
+      <span>Ktalogo-Dgital v3.0.0 · Guía del ejecutable</span>
+      <span>PC Windows 10/11 · Web · Android</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
